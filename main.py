@@ -15,12 +15,12 @@ def main(topic, person1, person2):
     """
     # Step 1: Generate dialogue
     dialogue = dialogue_generator.generate_dialogue(topic, person1, person2)
-    print("Generated Dialogue:")
-    print(dialogue)
+    print("Dialogue generated!")
+    #print(dialogue)
 
     # Step 2: Synthesize voices (Optional for now)
-    output_path = "output_dialogue.mp3"
-    audio_files = text_to_speech.synthesize_voices(dialogue,output_path)
+    output_path = f"{topic}_{person1}_{person2}.mp3"
+    audio_files = text_to_speech.synthesize_voices(topic, dialogue, output_path)
     print("Audio files generated:", audio_files)
 
     # Step 3: Create image with dialogue
@@ -34,7 +34,20 @@ def main(topic, person1, person2):
 
 if __name__ == "__main__":
     # Example inputs
-    topic = "Blockchain"
-    person1 = "Donald Trump"
+    topic = "UEFA Champions League"
+    '''
+    Choose from the following famous people:
+    - Lionel Messi
+    - Justin Bieber
+    - Andrew Tate
+    - Donald Trump
+    - Gandalf
+    - Celine Dion
+    - Dakota Johnson
+    - Taylor Swift
+    - Nicole Kidman
+    - Helena Bonham Carter
+    '''
+    person1 = "Lionel Messi"
     person2 = "Justin Bieber"
     main(topic, person1, person2)

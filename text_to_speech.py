@@ -2,46 +2,14 @@ import os
 import requests
 from dotenv import load_dotenv
 from pydub import AudioSegment
-import io
+import math
 
 # Problems 
-# - how to get specific voice id for a speaker from eleven labs api ?
-# - how to combine multiple audio files into one audio file ?
+# - how to get specific voice id for a speaker from eleven labs api ? 
+# -> Uploading a sample audio needs verification so I created voices from desciption
+# - how to combine multiple audio files into one audio file ? -> Done
 
-# def fetch_voice_id(speaker_name):
-#     """
-#     Fetch or map the voice ID for a given speaker name using Eleven Labs API.
-
-#     Parameters:
-#     speaker_name (str): Name of the speaker.
-
-#     Returns:
-#     str: Voice ID corresponding to the speaker.
-#     """
-#     load_dotenv()
-#     api_key = os.getenv("ELEVENLABS_API_KEY")
-#     base_url = "https://api.elevenlabs.io/v1/voices"
-
-#     if not api_key:
-#         raise ValueError("Missing Eleven Labs API key in environment variables.")
-
-#     headers = {
-#         "Accept": "application/json",
-#         "xi-api-key": api_key,
-#     }
-#     # response = requests.get(base_url, headers={"Authorization": f"Bearer {api_key}"})
-#     response = requests.get(base_url, headers=headers)
-#     response.raise_for_status()
-#     voices = response.json().get("voices", [])
-
-#     # Find a matching voice by name (this assumes a simple name match)
-#     for voice in voices:
-#         if speaker_name.lower() in voice.get("name", "").lower():
-#             return voice.get("voice_id")
-
-#     raise ValueError(f"No matching voice found for speaker '{speaker_name}'.")
-
-def synthesize_voices(dialogue, output_path):
+def synthesize_voices(topic, dialogue, output_path):
     """
     Convert a dialogue into speech using Eleven Labs API, alternating between speakers.
 
@@ -60,17 +28,23 @@ def synthesize_voices(dialogue, output_path):
         raise ValueError("Missing Eleven Labs API key in environment variables.")
 
     lines = [line for line in dialogue.strip().split("\n") if line.strip()]
+    file_names = []
     audio_segments = []
-    voice_cache = {"Donald Trump": "9BWtsMINqrJLrRacOk9x", "Justin Bieber": "CwhRBWXzGAHq8TQ4Fs17"}
-    #combined_audio = AudioSegment.silent(duration=0)
-    # print(lines)
+    voice_cache = {"Donald Trump": "g3U3eVk0Yt5sfeJlxM0P", 
+                   "Justin Bieber": "HLdlhjpJxmtzdJlOEsKv",
+                   "Andrew Tate":"6PgIfRMmk2rtjgBBmsHM",
+                   "Lionel Messi":"Dzc1MThPTaWVYCF2dwcL",
+                   "Gandalf":"2pUh3WvmJfKcmUzjaqrA",
+                   "Celine Dion":"0pDL6hElaKtwz4gU3Oez",
+                   "Dakota Johnson":"W8b7yotTTKO1HaSI5xSh",
+                   "Taylor Swift":"is13V6bEhe2BdMasbKuN",
+                   "Nicole Kidman":"A6tzLAZnfblVILfkLgbB",
+                   "Helena Bonham Carter":"vPJVoXdSXn5usCAi1Zxw"}
 
     i = 0
     for line in lines:
         try:
             speaker, text = line.split(": ", 1)
-            # if speaker not in voice_cache:
-            #     voice_cache[speaker] = fetch_voice_id(speaker)
             voice_id = voice_cache[speaker]
 
             headers = {
@@ -97,16 +71,18 @@ def synthesize_voices(dialogue, output_path):
             response.raise_for_status()
 
             # audio_data = response.content
-            with open(f"test_{i}.mp3", "wb") as f:
+            file_name = f"{topic}_{speaker}_{math.floor(i/2)}.mp3"
+            file_names.append(file_name)
+            with open(file_name, "wb") as f:
                 f.write(response.content)
-            try:
-                audio_segments.append(AudioSegment.from_mp3(f"D:\\University\\AnujDevelops\\EchoesOfFame_Anuj\\test_{i}.mp3"))
-            except Exception as e:
-                print(f"Very bad")
         except Exception as e:
             print(f"Error processing line '{line}': {e}")
         i += 1
 
-    combined_audio = sum(audio_segments)
-    combined_audio.export("combined_audio.mp3", format="mp3")
+    combined_audio = AudioSegment.from_mp3(file_names[0])
+    for file_name in file_names[1:]:
+        audio = AudioSegment.from_mp3(file_name)
+        combined_audio = combined_audio + audio
+
+    combined_audio.export(output_path, format="mp3")
     return output_path
