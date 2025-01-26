@@ -1,6 +1,6 @@
 import dialogue_generator
 import text_to_speech
-import image_creator
+from image_creator import ByteToScale, LipSyncVideo, VideoCreator
 import instagram_poster
 
 
@@ -16,7 +16,7 @@ def main(topic, person1, person2):
     # Step 1: Generate dialogue
     dialogue = dialogue_generator.generate_dialogue(topic, person1, person2)
     print("Dialogue generated!")
-    #print(dialogue)
+    print(dialogue)
 
     # Step 2: Synthesize voices (Optional for now)
     output_path = f"{topic}_{person1}_{person2}.mp3"
@@ -24,8 +24,18 @@ def main(topic, person1, person2):
     print("Audio files generated:", audio_files)
 
     # Step 3: Create image with dialogue
-    # image_path = image_creator.create_image(dialogue, person1, person2)
-    # print("Image created at:", image_path)
+    bytescale = ByteToScale(person1, person2, topic)
+    image_urls, audio_urls = bytescale.run()
+
+    print(image_urls, audio_urls)
+
+    # Generate lip-sync videos
+    lipsync = LipSyncVideo(person1, person2, image_urls, audio_urls)
+    video_urls = lipsync.run()
+
+    # Combine videos
+    video_creator = VideoCreator(video_urls, person1, person2, topic)
+    video_creator.run()
 
     # Step 4: Post to Instagram
     # instagram_poster.post_to_instagram(image_path, topic)
@@ -34,7 +44,7 @@ def main(topic, person1, person2):
 
 if __name__ == "__main__":
     # Example inputs
-    topic = "UEFA Champions League"
+    topic = "Who wears weird outfits better"
     '''
     Choose from the following famous people:
     - Lionel Messi
@@ -48,6 +58,6 @@ if __name__ == "__main__":
     - Nicole Kidman
     - Helena Bonham Carter
     '''
-    person1 = "Lionel Messi"
-    person2 = "Justin Bieber"
+    person1 = "Nicole Kidman"
+    person2 = "Helena Bonham Carter"
     main(topic, person1, person2)

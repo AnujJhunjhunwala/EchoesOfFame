@@ -29,7 +29,6 @@ def synthesize_voices(topic, dialogue, output_path):
 
     lines = [line for line in dialogue.strip().split("\n") if line.strip()]
     file_names = []
-    audio_segments = []
     voice_cache = {"Donald Trump": "g3U3eVk0Yt5sfeJlxM0P", 
                    "Justin Bieber": "HLdlhjpJxmtzdJlOEsKv",
                    "Andrew Tate":"6PgIfRMmk2rtjgBBmsHM",
@@ -71,7 +70,8 @@ def synthesize_voices(topic, dialogue, output_path):
             response.raise_for_status()
 
             # audio_data = response.content
-            file_name = f"{topic}_{speaker}_{math.floor(i/2)}.mp3"
+            speaker_name = speaker.split(" ")[0].lower()
+            file_name = f"dialogues/{topic}_{speaker_name}_{math.floor(i/2)}.mp3"
             file_names.append(file_name)
             with open(file_name, "wb") as f:
                 f.write(response.content)
@@ -79,10 +79,10 @@ def synthesize_voices(topic, dialogue, output_path):
             print(f"Error processing line '{line}': {e}")
         i += 1
 
-    combined_audio = AudioSegment.from_mp3(file_names[0])
+    """combined_audio = AudioSegment.from_mp3(file_names[0])
     for file_name in file_names[1:]:
         audio = AudioSegment.from_mp3(file_name)
         combined_audio = combined_audio + audio
 
-    combined_audio.export(output_path, format="mp3")
+    combined_audio.export(output_path, format="mp3")"""
     return output_path
