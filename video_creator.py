@@ -1,7 +1,7 @@
 import os
 import requests
 from dotenv import load_dotenv
-from moviepy import VideoFileClip, concatenate_videoclips
+from moviepy.editor import VideoFileClip, concatenate_videoclips
 import subprocess
 import json
 
@@ -144,6 +144,7 @@ class VideoCreator:
     def __init__(self, video_urls, first_person, second_person, topic):
         self.video_urls = video_urls
         self.save_videos_path = "videos/"
+        os.makedirs(self.save_videos_path, exist_ok=True)
         self.first_person = first_person
         self.second_person = second_person
         self.topic = topic
@@ -229,7 +230,15 @@ class VideoCreator:
             file_path = os.path.join(self.save_videos_path, file)
             try:
                 os.remove(file_path)
-                print(f"Deleted temporary file: {file_path}")
+                print(f"Deleted temporary video file: {file_path}")
+            except OSError as e:
+                print(f"Error deleting file {file_path}: {e}")
+        
+        for file in os.listdir("dialogues"):
+            file_path = os.path.join("dialogues", file)
+            try:
+                os.remove(file_path)
+                print(f"Deleted temporary audio file: {file_path}")
             except OSError as e:
                 print(f"Error deleting file {file_path}: {e}")
 

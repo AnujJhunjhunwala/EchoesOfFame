@@ -1,6 +1,6 @@
 import dialogue_generator
 import text_to_speech
-from image_creator import ByteToScale, LipSyncVideo, VideoCreator
+from video_creator import ByteToScale, LipSyncVideo, VideoCreator
 import instagram_poster
 
 
@@ -44,7 +44,7 @@ def main(topic, person1, person2):
 
 if __name__ == "__main__":
     # Example inputs
-    topic = "Who wears weird outfits better"
+    topic = "Lord of the Rings vs Titanic"
     '''
     Choose from the following famous people:
     - Lionel Messi
@@ -58,6 +58,6 @@ if __name__ == "__main__":
     - Nicole Kidman
     - Helena Bonham Carter
     '''
-    person1 = "Nicole Kidman"
-    person2 = "Helena Bonham Carter"
+    person1 = "Gandalf"
+    person2 = "Celine Dion"
     main(topic, person1, person2)

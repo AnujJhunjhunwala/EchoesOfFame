@@ -23,6 +23,7 @@ def synthesize_voices(topic, dialogue, output_path):
     load_dotenv()
     api_key = os.getenv("ELEVENLABS_API_KEY")
     base_url = "https://api.elevenlabs.io/v1/text-to-speech"
+    os.makedirs("dialogues/", exist_ok=True)
 
     if not api_key:
         raise ValueError("Missing Eleven Labs API key in environment variables.")
