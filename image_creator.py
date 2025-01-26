@@ -223,16 +223,15 @@ class VideoCreator:
 
     def cleanup_temp_files(self):
         """
-        Delete all temporary video files starting with 'temp_'.
+        Delete all temporary video files.
         """
         for file in os.listdir(self.save_videos_path):
-            if file.startswith("temp_"):
-                file_path = os.path.join(self.save_videos_path, file)
-                try:
-                    os.remove(file_path)
-                    print(f"Deleted temporary file: {file_path}")
-                except OSError as e:
-                    print(f"Error deleting file {file_path}: {e}")
+            file_path = os.path.join(self.save_videos_path, file)
+            try:
+                os.remove(file_path)
+                print(f"Deleted temporary file: {file_path}")
+            except OSError as e:
+                print(f"Error deleting file {file_path}: {e}")
 
     def run(self):
         self.combine_videos()
