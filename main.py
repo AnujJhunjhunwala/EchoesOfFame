@@ -1,6 +1,7 @@
 import dialogue_generator
 import text_to_speech
 from video_creator import ByteToScale, LipSyncVideo, VideoCreator
+import argparse
 import instagram_poster
 
 
@@ -43,8 +44,6 @@ def main(topic, person1, person2):
 
 
 if __name__ == "__main__":
-    # Example inputs
-    topic = "Lord of the Rings vs Titanic"
     '''
     Choose from the following famous people:
     - Lionel Messi
@@ -58,6 +57,12 @@ if __name__ == "__main__":
     - Nicole Kidman
     - Helena Bonham Carter
     '''
-    person1 = "Gandalf"
-    person2 = "Celine Dion"
-    main(topic, person1, person2)
+
+    parser = argparse.ArgumentParser(description="Generate dialogues between two persons on a given topic.")
+    parser.add_argument("--topic", required=True, type=str, help="Topic of the dialogue")
+    parser.add_argument("--person1", required=True, type=str, help="Name of the first person")
+    parser.add_argument("--person2", required=True, type=str, help="Name of the second person")
+
+    args = parser.parse_args()
+
+    main(args.topic, args.person1, args.person2)

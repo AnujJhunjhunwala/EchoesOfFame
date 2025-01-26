@@ -234,8 +234,8 @@ class VideoCreator:
             except OSError as e:
                 print(f"Error deleting file {file_path}: {e}")
         
-        for file in os.listdir("dialogues"):
-            file_path = os.path.join("dialogues", file)
+        for file in os.listdir("dialogues/"):
+            file_path = os.path.join("dialogues/", file)
             try:
                 os.remove(file_path)
                 print(f"Deleted temporary audio file: {file_path}")

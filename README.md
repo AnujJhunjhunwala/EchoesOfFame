@@ -1,5 +1,9 @@
 # EchoesOfFame
 
+1. pip install -r requirements.txt
+
+2. Sample command - python main.py --topic "Messi vs Ronaldo" --person1 "Lionel Messi" --person2  "Donald Trump"
+
 # Beray - notes (you can delete after reading)
 
 * if anyone wants to change the images, make sure the new image resolution should be max 1920x1080 and its name should be the first name of that person (donald, nicole etc.) and the file format should be png.
