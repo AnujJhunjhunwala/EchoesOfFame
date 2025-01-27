@@ -28,7 +28,7 @@ def main(topic, person1, person2):
     bytescale = ByteToScale(person1, person2, topic)
     image_urls, audio_urls = bytescale.run()
 
-    print(image_urls, audio_urls)
+    # print(image_urls, audio_urls)
 
     # Generate lip-sync videos
     lipsync = LipSyncVideo(person1, person2, image_urls, audio_urls)
@@ -38,8 +38,9 @@ def main(topic, person1, person2):
     video_creator = VideoCreator(video_urls, person1, person2, topic)
     video_creator.run()
 
-    # Step 4: Post to Instagram
-    # instagram_poster.post_to_instagram(image_path, topic)
+    # Step 4: Post to Instagram - uncomment below lines to post to Instagram
+    # video_path = f"final_video/final_video_{person1}_{person2}_{topic}.mp4"
+    # instagram_poster.post_to_instagram(video_path, topic)
     # print("Post uploaded to Instagram!")
 
 
