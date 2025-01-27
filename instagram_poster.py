@@ -18,3 +18,6 @@ def post_to_instagram(video_path, topic):
     cl.login(os.getenv("INSTAGRAM_USERNAME"), os.getenv("INSTAGRAM_PASSWORD"))
     cl.clip_upload(video_path, caption=topic)
     cl.logout()
+    # Clean up thumbnail from final_video folder
+    os.remove(f"{video_path}.jpg")
+    

@@ -41,35 +41,39 @@
 Use the following command to generate a conversation and post it to Instagram:
 
     python main.py --topic "TOPIC" --person1 "PERSON 1" --person2 "PERSON 2"
-- --topic: The theme or subject of the conversation.
-- --person1 and --person2: The two celebrities featured in the conversation.
+- **--topic**: The theme or subject of the conversation.
+- **--person1** and **--person2**: The two celebrities featured in the conversation. (Choose from these celebs - Lionel Messi, Justin Bieber, Andrew Tate, Donald Trump, Gandalf, Celine Dion, Dakota Johnson, Taylor Swift, Nicole Kidman, Helena Bonham Carter)
 
 ## File and Folder Structure
 
-1. Images:
+1. **Images**:
 - If you want to change the celebrity images, ensure the following:
     - The resolution should not exceed 1920x1080.
     - The file name should be the first name of the person (e.g., donald.png, nicole.png).
 
-2. Dialogues:
+2. **Dialogues**:
 - Each generated dialogue is saved as an audio file in the following format:
     ```bash
     dialogues/"topic_name"_"first_name"_"index".mp3
     
     For example: dialogues/messi_vs_ronaldo_donald_1.mp3
-3. Videos:
+3. **Videos**:
 - Combined videos are saved in the final_video folder.
 - You can directly use the files from this folder for Instagram posting.
+## Tips and Reminders
+- If you want to add new celebrities, only adding image and giving its name in the parser is enough.
+- While adding the new image, if you want to get better results, try to find an image which that person's mouth is slightly open
+
 ## Technologies and APIs Used
-- OpenAI API: To generate realistic and engaging conversations.
-- Eleven Labs API: For high-quality voice synthesis.
-- Gooey: For lipsync.
-- Bytescale API: Generate URLs for efficient image and video handling.
+- **OpenAI API**: To generate realistic and engaging conversations.
+- **Eleven Labs API**: For high-quality voice synthesis.
+- **Gooey.AI API**: For lipsync.
+- **Bytescale API**: Generate URLs for efficient image and video handling.
 ## Contributors
 1. Anuj Jhunjhunwala
 2. Emre Beray Boztepe
 3. Łukasz Wasilewski
 ## Future Enhancements
-- Video-Based Reels: Transition from static images to animated video reels for a more engaging experience.
-- Custom Celebrity Selection: Allow users to select celebrities dynamically.
-- Multi-Language Support: Generate and synthesize conversations in different languages.
+- **Video-Based Reels**: Transition from static images to animated video reels for a more engaging experience.
+- **Custom Celebrity Selection**: Allow users to select celebrities dynamically.
+- **Multi-Language Support**: Generate and synthesize conversations in different languages.
