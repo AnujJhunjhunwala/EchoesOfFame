@@ -60,9 +60,6 @@ Use the following command to generate a conversation and post it to Instagram:
 3. **Videos**:
 - Combined videos are saved in the final_video folder.
 - You can directly use the files from this folder for Instagram posting.
-## Tips and Reminders
-- If you want to add new celebrities, only adding image and giving its name in the parser is enough.
-- While adding the new image, if you want to get better results, try to find an image which that person's mouth is slightly open
 
 ## Technologies and APIs Used
 - **OpenAI API**: To generate realistic and engaging conversations.
