@@ -6,16 +6,14 @@
 
 🌟 Check out the Instagram page: [@echoes.of.fame](https://www.instagram.com/echoes.of.fame/?igsh=MW1hdWZxZnk1em40ZA%3D%3D)
 
----
 
 ## Features
 - **AI-Generated Dialogues**: Harness the power of OpenAI's GPT to create engaging and realistic conversations.
 - **Voice Synthesis**: Eleven Labs API brings the celebrities' voices to life.
 - **Seamless Media Handling**: Bytescale API ensures smooth handling of images and videos.
-- **Interactive GUI**: Gooey provides a simple, user-friendly interface for lipsync.
+- **Realistic Lipsync**: Gooey.AI API provides a simple interface for lipsync.
 - **Instagram Automation**: Automatically posts the reels to the Instagram page.
 
----
 
 ## Usage
 
